@@ -1,0 +1,56 @@
+/* Medical Memory — design tokens.
+   A single dark palette, one accent family, and severity colours that are used
+   consistently everywhere a document conflicts with another document. */
+
+:root {
+  --bg-0: #06080c;
+  --bg-1: #0a0e14;
+  --bg-2: #0f141c;
+  --surface: rgba(255, 255, 255, 0.028);
+  --surface-2: rgba(255, 255, 255, 0.05);
+  --surface-3: rgba(255, 255, 255, 0.075);
+  --line: rgba(255, 255, 255, 0.075);
+  --line-strong: rgba(255, 255, 255, 0.14);
+
+  --text: #e8edf4;
+  --text-2: #a6b2c4;
+  --text-3: #6f7d92;
+  --text-4: #4b5769;
+
+  --accent: #3ddc97;
+  --accent-2: #38bdf8;
+  --accent-3: #a78bfa;
+  --accent-soft: rgba(61, 220, 151, 0.14);
+  --accent-line: rgba(61, 220, 151, 0.34);
+
+  --high: #ff5c7a;
+  --high-soft: rgba(255, 92, 122, 0.13);
+  --medium: #ffb457;
+  --medium-soft: rgba(255, 180, 87, 0.13);
+  --low: #7dd3fc;
+  --low-soft: rgba(125, 211, 252, 0.12);
+  --ok: #3ddc97;
+  --ok-soft: rgba(61, 220, 151, 0.12);
+  --external: #a78bfa;
+  --external-soft: rgba(167, 139, 250, 0.13);
+
+  --radius-lg: 16px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 30px 70px -24px rgba(0, 0, 0, 0.85);
+
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+  --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, 'Cascadia Mono', monospace;
+
+  --sidebar-w: 244px;
+  --drawer-w: 520px;
+  --scrubber-h: 84px;
+  --topbar-h: 60px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

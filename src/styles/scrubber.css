@@ -1,0 +1,359 @@
+/* Persistent time scrubber — the Time Machine control that every view obeys.
+   The date and the transport sit on one line. The track uses the full width
+   underneath, so the marks and the year jumps are not squeezed beside them. */
+
+.scrubber {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(10, 14, 20, 0.92), rgba(6, 8, 12, 0.96));
+  backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 18px 4px;
+}
+
+.scrubber-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.scrubber-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: none;
+  min-width: 0;
+}
+
+.scrubber-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--text-4);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.scrubber-date {
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.15;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.scrubber-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.scrubber-track {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  min-width: 0;
+}
+
+.scrubber-rail {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.scrubber-fill {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 12px rgba(61, 220, 151, 0.35);
+}
+
+.scrubber-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 26px;
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: grab;
+}
+
+.scrubber-input:active {
+  cursor: grabbing;
+}
+
+.scrubber-input:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 5px rgba(61, 220, 151, 0.28), 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.scrubber-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #04140d;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(61, 220, 151, 0.12), 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.scrubber-input::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #04140d;
+  border: 2px solid var(--accent);
+}
+
+.scrubber-input::-moz-range-track {
+  background: transparent;
+}
+
+.scrubber-ticks {
+  position: absolute;
+  inset: 0 0 14px 0;
+  pointer-events: none;
+}
+
+.scrubber-tick {
+  position: absolute;
+  top: 8px;
+  width: 1px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(-0.5px);
+}
+
+.scrubber-tick.is-doc {
+  height: 12px;
+  top: 7px;
+  background: rgba(56, 189, 248, 0.55);
+}
+
+.scrubber-tick.is-event {
+  width: 2px;
+  height: 14px;
+  top: 6px;
+  border-radius: 1px;
+  background: var(--medium);
+}
+
+.scrubber-tick.is-conflict {
+  width: 2px;
+  height: 16px;
+  top: 5px;
+  border-radius: 1px;
+  background: var(--high);
+}
+
+.scrubber-years {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14px;
+  pointer-events: none;
+}
+
+.scrubber-year {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  padding: 0 3px;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--text-4);
+  font-family: var(--mono);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.scrubber-year.is-start {
+  transform: none;
+}
+
+.scrubber-year.is-end {
+  transform: translateX(-100%);
+}
+
+.scrubber-year:hover,
+.scrubber-year.is-current {
+  color: var(--text-2);
+}
+
+.scrubber-year:focus-visible {
+  color: var(--text);
+  outline: none;
+}
+
+.scrubber-counts {
+  display: flex;
+  gap: 12px;
+  font-size: 10.5px;
+  font-family: var(--mono);
+  flex: none;
+}
+
+.scrubber-count {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.scrubber-count-n {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.scrubber-count-l {
+  color: var(--text-4);
+}
+
+.scrubber-nav {
+  display: inline-flex;
+  align-items: stretch;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.scrubber-nav button {
+  padding: 4px 9px;
+  font-size: 11.5px;
+  line-height: 1.2;
+  color: var(--text-2);
+  border-right: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.scrubber-nav button:last-child {
+  border-right: none;
+}
+
+.scrubber-nav button:hover:not(:disabled) {
+  background: var(--surface-3);
+  color: var(--text);
+}
+
+.scrubber-nav button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.scrubber-nav button.is-compare {
+  background: linear-gradient(140deg, rgba(61, 220, 151, 0.95), rgba(56, 189, 248, 0.85));
+  color: #04120c;
+  font-weight: 600;
+}
+
+.scrubber-nav button.is-compare:hover {
+  filter: brightness(1.06);
+  color: #04120c;
+}
+
+.scrubber-nav button:focus-visible {
+  outline: 1px solid var(--accent-line);
+  outline-offset: -1px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex: none;
+}
+.dot.ok {
+  background: var(--ok);
+}
+.dot.warn {
+  background: var(--medium);
+}
+.dot.critical {
+  background: var(--high);
+}
+.dot.info {
+  background: var(--accent-2);
+}
+.dot.external {
+  background: var(--external);
+}
+.dot.muted {
+  background: var(--text-4);
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive scrubber                                                 */
+/*                                                                    */
+/* The track always keeps the full width. Below ~720px the count words */
+/* drop off so the date, the numbers, and the transport still share one */
+/* line inside the fixed bar. A phone stacks that line and lets the bar */
+/* grow, because a 360px row cannot hold the transport beside the date.  */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 719.98px) {
+  .scrubber-count-l {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .scrubber-counts {
+    gap: 8px;
+  }
+
+  .scrubber-nav button {
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .scrubber {
+    height: auto;
+    gap: 6px;
+    padding: 10px 12px 8px;
+  }
+
+  .scrubber-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .scrubber-tools {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

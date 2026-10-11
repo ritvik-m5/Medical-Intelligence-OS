@@ -1,0 +1,44 @@
+[
+  {
+    "fileName": "01-2023-10-19-health-history.txt",
+    "title": "Health history questionnaire",
+    "kind": "questionnaire",
+    "date": "2023-10-19",
+    "facility": "Riverbend Family Medicine",
+    "text": "RIVERBEND FAMILY MEDICINE\nHealth History Questionnaire  (pt completed, scanned, retyped)\n\nPatient : Alex Morgan\nDOB 4/12/1979\nCompleted: 10/19/2023\n\nplease fill out as best you can -- office staff will enter later\n\nALLERGIES\nPenicillin - rash   (childhood, still listed)\n\nIMMUNIZATIONS\nInfluenza vaccine 2023\nCOVID-19 vaccine 2023\nTetanus booster 2022\n\nBLOOD TYPE\nA positive\n\nSOCIAL HISTORY\nFormer smoker, quit 2015, 12 pack-year history.\nAlcohol:  2 drinks per week.\n\nFAMILY HISTORY\nFather: hypertension, type 2 diabetes.\nMother: hyperlipidemia.\n\nNOTES FROM FRONT DESK\nform was messy / some boxes left blank / blood type copied from an older card\n"
+  },
+  {
+    "fileName": "02-2025-03-11-discharge-summary.txt",
+    "title": "Hospital discharge summary",
+    "kind": "discharge_summary",
+    "date": "2025-03-11",
+    "facility": "St. Mary's Medical Center",
+    "author": "R. Chen, MD",
+    "text": "ST MARYS MEDICAL CENTER\nHospital Discharge Summary\n\nPatient: Alex Morgan   MRN 44821\nAdmission: 03/09/2025\nDischarge: 03/11/2025\nAttending: R. Chen, MD\n\nPROCEDURE\nLaparoscopic cholecystectomy\n\nHOSPITAL COURSE\nUncomplicated post-operative course. Tolerated diet and ambulated.\nPain controlled. No fever.\n\nVITAL SIGNS AT DISCHARGE\nBlood pressure  128/76 mmHg\nHeart rate  82 bpm\n\nDISCHARGE MEDICATIONS\nAtorvastatin 40 mg at bedtime\nLisinopril 10 mg daily\n\nALLERGIES\nPenicillin - rash\n\nFOLLOW UP\nSee primary care in 2 weeks.\n\n-- transcribed from dictation, headings not standardised --\n"
+  },
+  {
+    "fileName": "03-2026-02-18-annual-visit.txt",
+    "title": "Annual visit, diabetes and weight review",
+    "kind": "visit_note",
+    "date": "2026-02-18",
+    "facility": "Riverbend Family Medicine",
+    "author": "Dana Whitfield, MD",
+    "text": "RIVERBEND FAMILY MEDICINE\nAnnual Visit - Diabetes and Weight Review\n\nPatient: Alex Morgan\nDate of Service: 02/18/2026\nProvider: Dana Whitfield, MD\n\nCHIEF COMPLAINT\nRoutine follow-up for diabetes.\n\nPAST MEDICAL HISTORY\nType 2 Diabetes, diagnosed 2026\nHypertension, diagnosed 2018\nObesity, class I\nHyperlipidemia\n\nVITAL SIGNS\nBlood pressure  130/80 mmHg\nHeart rate  68 bpm\nWeight  176 lb\nBMI  26.6\n\nCURRENT MEDICATIONS\nMetformin  1000 mg  twice daily\nSemaglutide  1 mg  weekly\nAtorvastatin  40 mg  at bedtime\nLisinopril  20 mg  daily\n\nASSESSMENT\n1.  Type 2 Diabetes, improving.\n2.  Hypertension, well controlled.\n3.  Obesity, weight down.\n\nPLAN\nContinue current medications.\nRepeat A1c in 3 months.\n\n(copied forward from last note -- doses may not match pharmacy list)\n"
+  },
+  {
+    "fileName": "04-2026-06-24-medication-list.txt",
+    "title": "Medication reconciliation",
+    "kind": "medication_list",
+    "date": "2026-06-24",
+    "facility": "Riverbend Family Medicine",
+    "text": "MEDICATION RECONCILIATION\n\nPatient:  Alex Morgan\nDate:  06/24/2026\nSource:  pharmacy fill + patient bag  (lists do not match)\n\nACTIVE MEDICATIONS\n\nAtorvastatin 40 mg at bedtime\nMetformin 500 mg twice daily\nSemaglutide 0.5 mg weekly\nLisinopril 10 mg once daily\n\nDISCONTINUED\nAtorvastatin 20 mg at bedtime  (stopped March 2025)\n\nAllergies:  Penicillin - rash\n\npharmacy has metformin 500; last clinic note said 1000. patient unsure.\n"
+  },
+  {
+    "fileName": "05-2026-09-15-lipid-panel.txt",
+    "title": "Lipid panel and metabolic panel",
+    "kind": "lab_report",
+    "date": "2026-09-15",
+    "facility": "Northside Laboratories",
+    "text": "NORTHSIDE LABORATORIES\nLipid Panel and Comprehensive Metabolic Panel\n\nPatient:  Alex Morgan\nDOB: 04/12/1979\nCollected:  09/15/2026\n\nRESULTS\n\nLIPID PANEL\nTotal Cholesterol    218  H   mg/dL   ( <200 )\nHDL Cholesterol       46      mg/dL   ( >40 )\nLDL Cholesterol      132  H   mg/dL   ( <100 )\nTriglycerides        148      mg/dL   ( <150 )\nNon-HDL Cholesterol  172  H   mg/dL   ( <130 )\n\nCOMPREHENSIVE METABOLIC PANEL\nFasting Glucose      122  H   mg/dL   ( 70-99 )\nHemoglobin A1c       6.6  H   %       ( 4.0-5.6 )\nCreatinine           1.10     mg/dL   ( 0.60-1.30 )\neGFR                  78      mL/min/1.73m2\nPotassium             45   L  mmol/L  ( 3.5-5.1 )   <-- check decimal\nALT                   35      U/L     ( 7-56 )\nAST                   26      U/L     ( 10-40 )\nUric acid             6.8     mg/dL   ( 3.4-7.0 )\nTSH                   2.8     mIU/L   ( 0.4-4.0 )\n\ntech note: K result looks like a decimal shift, do not treat as 45\n"
+  }
+]

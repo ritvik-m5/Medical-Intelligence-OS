@@ -1,0 +1,467 @@
+/* Shell, sidebar, top bar.
+
+   The scroll architecture, stated once so it is not guessed at:
+
+     html, body, #root   height: 100%, body clips
+     .shell              fills the viewport, is a grid
+     .main               a grid item, min-height: 0 so it may shrink
+     .view               the ONE scroll container, min-height: 0, overflow-y: auto
+
+   The `min-height: 0` declarations are the load-bearing part. A grid item
+   defaults to `min-height: auto`, which means it refuses to shrink below its
+   content: the "scroll container" then grows to fit the content, spills past
+   body's clip, and nothing scrolls at all. The content is present and
+   unreachable, which reads as a broken page rather than a layout bug. */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Mobile browsers size `100%` against the largest viewport, so a page can end up
+   taller than the visible area with its last row behind the browser chrome.
+   `dvh` tracks the visible viewport, so the scroll container always ends where
+   the screen does. */
+@supports (height: 100dvh) {
+  html,
+  body,
+  #root {
+    height: 100dvh;
+  }
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+/* ---------------- Sidebar ---------------- */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 20px 16px;
+  border-right: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0));
+  overflow-y: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 2px 6px 0;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, rgba(61, 220, 151, 0.9), rgba(56, 189, 248, 0.75));
+  color: #04110b;
+  box-shadow: 0 8px 22px -8px rgba(61, 220, 151, 0.6);
+  flex: none;
+}
+
+.brand-name {
+  font-size: 13.5px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.brand-tag {
+  font-size: 10.5px;
+  color: var(--text-3);
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--text-4);
+  padding: 0 8px 10px;
+  font-weight: 600;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  font-size: 13px;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.nav-item.is-active {
+  background: var(--surface-3);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.nav-item svg {
+  flex: none;
+  opacity: 0.85;
+}
+
+.nav-item.is-active svg {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.nav-item.is-locked {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.nav-item.is-locked:hover {
+  background: transparent;
+  color: var(--text-2);
+}
+
+.nav-item.is-locked svg:last-child {
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+.nav-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-family: var(--mono);
+  padding: 1px 6px;
+  border-radius: 20px;
+  background: var(--high-soft);
+  color: var(--high);
+  border: 1px solid rgba(255, 92, 122, 0.28);
+}
+
+.nav-badge.is-soft {
+  background: var(--surface-2);
+  color: var(--text-3);
+  border-color: var(--line);
+}
+
+.side-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 12px;
+}
+
+.side-card + .side-card {
+  margin-top: 10px;
+}
+
+.patient-name {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.patient-meta {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  padding: 3px 0;
+}
+
+.stat-row span:first-child {
+  color: var(--text-3);
+}
+
+.stat-row span:last-child {
+  font-family: var(--mono);
+  color: var(--text);
+}
+
+.sidebar-foot {
+  margin-top: auto;
+  font-size: 10.5px;
+  color: var(--text-4);
+  line-height: 1.5;
+  padding: 0 6px;
+}
+
+/* ---------------- Main ---------------- */
+
+.main {
+  display: grid;
+  grid-template-rows: var(--topbar-h) minmax(0, 1fr) var(--scrubber-h);
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.main.is-chat {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.main.is-chat > .view--chat {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(6, 8, 12, 0.6);
+  backdrop-filter: blur(14px);
+}
+
+.topbar-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.topbar-sub {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The one scroll container. Everything else is fixed height. */
+.view {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  padding: 22px 24px 40px;
+  animation: fade-up 0.28s var(--ease);
+}
+
+/* Shown while a lazily-loaded workspace view is on its way. The builder is
+   eager, so this only ever appears when moving into the workspace. */
+.view-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 240px;
+  font-size: 12.5px;
+  color: var(--text-4);
+}
+
+.view-loading-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: engine-pulse 1.4s var(--ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view-loading-dot {
+    animation: none;
+  }
+}
+
+.view-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive shell                                                    */
+/*                                                                    */
+/* One layout, three ratios, locked to a fixed set of breakpoints so    */
+/* every device lands in exactly one band:                              */
+/*                                                                    */
+/*   phone        <  640px   single column, off-canvas nav              */
+/*   tablet       640–1023px  collapsed sidebar, two-up grids           */
+/*   desktop     ≥ 1024px   sidebar in place, full grids                */
+/*   large       ≥ 1440px   wider gutters and larger type (fluid)       */
+/*                                                                    */
+/* The numbers below are the only ones that vary; type and spacing      */
+/* scale with clamp() so the proportions hold at every width.           */
+/* ------------------------------------------------------------------ */
+
+/* The hamburger and the backdrop are inert on desktop. */
+.nav-toggle {
+  display: none;
+}
+
+.nav-backdrop {
+  display: none;
+}
+
+@media (max-width: 1023.98px) {
+  .shell {
+    /* One column: the sidebar leaves the grid and becomes an overlay. */
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 60;
+    width: min(var(--sidebar-w), 86vw);
+    transform: translateX(-102%);
+    transition: transform 0.26s var(--ease);
+    box-shadow: 24px 0 60px -20px rgba(0, 0, 0, 0.55);
+  }
+
+  .shell.nav-open .sidebar {
+    transform: translateX(0);
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text-2);
+    cursor: pointer;
+  }
+
+  .nav-toggle:hover {
+    color: var(--text);
+    border-color: var(--line-strong);
+  }
+
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(2, 4, 8, 0.55);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.26s var(--ease);
+  }
+
+  .shell.nav-open .nav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Topbar: keep the title on one line and let the actions wrap.         */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 1023.98px) {
+  .topbar {
+    gap: 10px;
+    padding: 0 12px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-title h1 {
+    font-size: 15px;
+  }
+
+  .topbar-sub {
+    display: none;
+  }
+
+  .topbar-actions {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .topbar {
+    padding: 0 10px;
+    min-height: var(--topbar-h);
+  }
+
+  /* The stacked scrubber is taller than its desktop row; let it grow. */
+  .main {
+    grid-template-rows: var(--topbar-h) minmax(0, 1fr) auto;
+  }
+
+  /* On a phone the actions fold under the title so nothing is clipped. */
+  .topbar-title {
+    flex: 1 1 100%;
+  }
+
+  .topbar-actions {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+
+  .topbar-actions .btn {
+    /* The "Ask the record" button may shrink but never vanish. */
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* View gutters and the scrubber scale with the viewport.               */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 1023.98px) {
+  .view {
+    padding: 18px 16px 32px;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .view {
+    padding: 14px 12px 28px;
+  }
+}
+
+/* Wide monitors keep the content column centred and readable. */
+@media (min-width: 1440px) {
+  .view-inner {
+    max-width: 1400px;
+  }
+}
+

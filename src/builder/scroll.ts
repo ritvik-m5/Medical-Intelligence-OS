@@ -1,0 +1,224 @@
+import { useEffect, useRef, useState } from 'react';
+
+/* ------------------------------------------------------------------ */
+/* Scroll and motion drivers                                           */
+/*                                                                    */
+/* Everything here degrades to a static page. No scroll listener, no    */
+/* IntersectionObserver and no rAF means the content is simply visible  */
+/* and motionless, which is also what a reader who has asked for        */
+/* reduced motion should get.                                          */
+/* ------------------------------------------------------------------ */
+
+const canObserve = () =>
+  typeof window !== 'undefined' && typeof window.IntersectionObserver !== 'undefined';
+
+const clamp01 = (value: number) => (value < 0 ? 0 : value > 1 ? 1 : value);
+
+/** Resolve the nearest scrollable ancestor of a node. */
+export function getScrollParent(node: HTMLElement): HTMLElement | null {
+  let parent = node.parentElement;
+  while (parent) {
+    const style = window.getComputedStyle(parent);
+    const overflowY = style.overflowY;
+    const overflowX = style.overflowX;
+    if (
+      overflowY === 'auto' ||
+      overflowY === 'scroll' ||
+      overflowY === 'overlay' ||
+      overflowX === 'auto' ||
+      overflowX === 'scroll' ||
+      overflowX === 'overlay'
+    ) {
+      return parent;
+    }
+    parent = parent.parentElement;
+  }
+  return null;
+}
+
+/** Whether the reader has asked the platform to reduce motion. */
+export function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduced(query.matches);
+    const onChange = () => setReduced(query.matches);
+    if (typeof query.addEventListener === 'function') {
+      query.addEventListener('change', onChange);
+      return () => query.removeEventListener('change', onChange);
+    }
+  }, []);
+
+  return reduced;
+}
+
+/**
+ * How far an element has travelled through the viewport.
+ *
+ * 0 when its top edge is at the bottom of the viewport, 1 when its bottom edge
+ * has passed the top. Reading is throttled to animation frames, and the listener
+ * is passive, so this never blocks scrolling.
+ */
+export function useScrollProgress<T extends HTMLElement>(
+  enabled = true,
+): { ref: React.RefObject<T>; progress: number } {
+  const ref = useRef<T>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const node = ref.current;
+    if (!node || typeof window === 'undefined') return;
+
+    // The builder scrolls its own .view container, not the page, so the scroll
+    // listener must live on the container, not on window.
+    const scrollNode = getScrollParent(node) ?? window.document.body;
+
+    let frame = 0;
+
+    const measure = () => {
+      frame = 0;
+      const nodeRect = node.getBoundingClientRect();
+      const containerRect = scrollNode.getBoundingClientRect();
+      const offsetTop =
+        nodeRect.top - containerRect.top; // element's top relative to the container
+      const containerHeight = containerRect.height;
+      const contentHeight = scrollNode.scrollHeight - containerHeight;
+      if (contentHeight <= 0) return;
+      setProgress(clamp01((scrollNode.scrollTop - offsetTop) / contentHeight));
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame =
+        typeof window.requestAnimationFrame === 'function'
+          ? window.requestAnimationFrame(measure)
+          : (measure(), 0);
+    };
+
+    measure();
+    scrollNode.addEventListener('scroll', onScroll, { passive: true });
+    scrollNode.addEventListener('resize', onScroll);
+    return () => {
+      if (frame && typeof window.cancelAnimationFrame === 'function') {
+        window.cancelAnimationFrame(frame);
+      }
+      scrollNode.removeEventListener('scroll', onScroll);
+      scrollNode.removeEventListener('resize', onScroll);
+    };
+  }, [enabled]);
+
+  return { ref, progress };
+}
+
+/**
+ * Reveal an element once, the first time it enters the viewport.
+ *
+ * Without IntersectionObserver the element is revealed immediately, so the
+ * content is never trapped behind an animation that cannot run.
+ */
+export function useReveal<T extends HTMLElement>(
+  options: { threshold?: number; rootMargin?: string } = {},
+): { ref: React.RefObject<T>; revealed: boolean } {
+  const ref = useRef<T>(null);
+  const [revealed, setRevealed] = useState(false);
+  const { threshold = 0.2, rootMargin = '0px 0px -10% 0px' } = options;
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (!canObserve()) {
+      setRevealed(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setRevealed(true);
+            observer.disconnect();
+            return;
+          }
+        }
+      },
+      { threshold, rootMargin },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [threshold, rootMargin]);
+
+  return { ref, revealed };
+}
+
+/**
+ * Type a rotating placeholder into the composer.
+ *
+ * Purely presentational, and disabled whenever the composer is focused or holds
+ * text, because a moving caret in a field you are typing into is hostile.
+ */
+export function useAnimatedPlaceholder(phrases: string[], active: boolean): string {
+  const [text, setText] = useState(phrases[0] ?? '');
+  const reduced = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (!active || reduced || phrases.length === 0) return;
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    let timer = 0;
+
+    const tick = () => {
+      const phrase = phrases[phraseIndex % phrases.length];
+      charIndex += deleting ? -1 : 1;
+      setText(phrase.slice(0, Math.max(charIndex, 0)));
+
+      let delay = deleting ? 18 : 34;
+      if (!deleting && charIndex >= phrase.length) {
+        deleting = true;
+        delay = 2200;
+      } else if (deleting && charIndex <= 0) {
+        deleting = false;
+        phraseIndex += 1;
+        delay = 320;
+      }
+      timer = window.setTimeout(tick, delay);
+    };
+
+    timer = window.setTimeout(tick, 900);
+    return () => window.clearTimeout(timer);
+  }, [active, reduced, phrases]);
+
+  if (!active || reduced) return phrases[0] ?? '';
+  return text;
+}
+
+/** Map a 0..1 progress value onto a numeric range. */
+export function lerp(from: number, to: number, t: number): number {
+  return from + (to - from) * clamp01(t);
+}
+
+/** Map progress onto a sub-range, clamped. Useful for staged choreography. */
+export function stageProgress(progress: number, start: number, end: number): number {
+  if (end <= start) return progress >= end ? 1 : 0;
+  return clamp01((progress - start) / (end - start));
+}
+
+/**
+ * Scroll an element into view, if the environment can.
+ *
+ * Guarded because the method is absent in some DOM implementations, including
+ * the one the tests run in, and a missing scroll should never break a click.
+ */
+export function scrollToElement(
+  element: Element | null | undefined,
+  options: ScrollIntoViewOptions = { behavior: 'smooth', block: 'start' },
+): void {
+  if (!element) return;
+  const scrollIntoView = (element as Element & { scrollIntoView?: (o?: ScrollIntoViewOptions) => void })
+    .scrollIntoView;
+  if (typeof scrollIntoView === 'function') scrollIntoView.call(element, options);
+}

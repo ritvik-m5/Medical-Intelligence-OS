@@ -1,0 +1,296 @@
+/* ------------------------------------------------------------------ */
+/* The State of the Record                                             */
+/*                                                                    */
+/* Five sections, one question. The items are buttons because they      */
+/* navigate; a line that looks like evidence but does not open is a lie. */
+/* Empty states are evidence states: searched, found, cannot conclude.  */
+/* ------------------------------------------------------------------ */
+
+.sor {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  max-width: 900px;
+}
+
+.sor-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sor-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+}
+
+.sor-title {
+  margin: 8px 0 0;
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.sor-sub {
+  margin: 8px 0 0;
+  max-width: 560px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-3);
+}
+
+.sor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sor-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.sor-section-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sor-section-note {
+  font-size: 12px;
+  color: var(--text-4);
+}
+
+.sor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sor-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-family: var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+
+.sor-item:hover {
+  border-color: var(--accent-line);
+  background: var(--surface-2);
+}
+
+.sor-item-kind {
+  flex-shrink: 0;
+  min-width: 72px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--accent-3);
+}
+
+.sor-item-label {
+  font-size: 13.5px;
+  font-weight: 550;
+  color: var(--text);
+}
+
+.sor-item-meta {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-4);
+}
+
+.sor-item-go {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--text-4);
+}
+
+.sor-item:hover .sor-item-go {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ */
+/* Open questions                                                      */
+/* ------------------------------------------------------------------ */
+
+.sor-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sor-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.sor-question-cat {
+  flex-shrink: 0;
+  margin-top: 2px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.sor-question-cat.is-conflict {
+  border-color: rgba(255, 92, 122, 0.34);
+  color: var(--high);
+}
+
+.sor-question-cat.is-gap {
+  border-color: rgba(255, 180, 87, 0.32);
+  color: var(--medium);
+}
+
+.sor-question-cat.is-evidence,
+.sor-question-cat.is-unestablished {
+  border-color: rgba(125, 211, 252, 0.32);
+  color: var(--low);
+}
+
+.sor-question-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sor-question-text {
+  font-size: 13.5px;
+  font-weight: 550;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.sor-question-evidence {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-4);
+}
+
+.sor-question-actions {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.sor-question-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  font-family: var(--font);
+  font-size: 11px;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.sor-question-status {
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font);
+  font-size: 10px;
+  color: var(--text-4);
+  cursor: pointer;
+}
+
+.sor-question-status.is-investigating {
+  border-color: rgba(125, 211, 252, 0.32);
+  color: var(--low);
+}
+
+.sor-question-status.is-answered {
+  border-color: var(--accent-line);
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ */
+/* The evidence state (an empty state that says what it searched)       */
+/* ------------------------------------------------------------------ */
+
+.sor-evidence-state {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-1);
+}
+
+.sor-evidence-state svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.sor-evidence-state strong {
+  display: block;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.sor-evidence-state p {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+
+.sor-evidence-state em {
+  font-style: normal;
+  color: var(--medium);
+}
+
+@media (max-width: 720px) {
+  .sor-head {
+    flex-direction: column;
+  }
+
+  .sor-item {
+    flex-wrap: wrap;
+  }
+
+  .sor-question {
+    flex-direction: column;
+  }
+
+  .sor-question-actions {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+}

@@ -1,0 +1,349 @@
+/* ------------------------------------------------------------------ */
+/* How it works                                                        */
+/*                                                                    */
+/* A reading page, not a control surface. Wide measure, generous        */
+/* leading, and no decoration that competes with the sentences. The     */
+/* tab cards are buttons because they navigate — a card that looks      */
+/* clickable and is not would be worse than plain text.                 */
+/* ------------------------------------------------------------------ */
+
+.guide {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  padding: 26px 24px 72px;
+  max-width: 940px;
+}
+
+.guide-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+}
+
+.guide-title {
+  margin: 12px 0 0;
+  font-size: clamp(24px, 3.4vw, 38px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.guide-lede {
+  margin: 14px 0 0;
+  max-width: 640px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+/* The one way home, and the same control at the top and the bottom. */
+.guide-home {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.guide-home:hover {
+  background: var(--accent);
+  color: var(--bg-0);
+}
+
+.guide-h2 {
+  margin: 0 0 12px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.guide-body {
+  margin: 0 0 14px;
+  max-width: 680px;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text-2);
+}
+
+.guide-body:last-child {
+  margin-bottom: 0;
+}
+
+/* The worked example. The whole page rests on this shape: a conclusion,
+   and directly under it the words it came from. */
+.guide-example {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--surface);
+}
+
+.guide-example-head {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+.guide-example-finding {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.guide-example-source {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-1);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.guide-example-note {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-4);
+}
+
+.guide-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 13px 15px;
+  border: 1px solid rgba(255, 180, 87, 0.3);
+  border-radius: var(--radius);
+  background: var(--medium-soft);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+/* ------------------------------------------------------------------ */
+/* Groups and tab cards                                                */
+/* ------------------------------------------------------------------ */
+
+.guide-group {
+  margin-top: 26px;
+}
+
+.guide-group-head {
+  margin-bottom: 14px;
+}
+
+.guide-group-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.guide-group-intro {
+  margin: 5px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-4);
+}
+
+.guide-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+  height: 100%;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-family: var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+
+.guide-card:hover {
+  border-color: var(--accent-line);
+  background: var(--surface-2);
+}
+
+.guide-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.guide-card-icon {
+  display: inline-flex;
+  padding: 6px;
+  border-radius: var(--radius-xs);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.guide-card-name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.guide-card-go {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--text-4);
+}
+
+.guide-card:hover .guide-card-go {
+  color: var(--accent);
+}
+
+.guide-card-line {
+  display: block;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-3);
+}
+
+.guide-card-key {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Glossary and limits                                                 */
+/* ------------------------------------------------------------------ */
+
+.guide-glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.guide-word {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 15px;
+  background: var(--surface);
+}
+
+.guide-word dt {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.guide-word dd {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+
+.guide-never-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-never-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-3);
+}
+
+.guide-never-list li svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--high);
+}
+
+.guide-never-list strong {
+  display: block;
+  color: var(--text);
+}
+
+.guide-remember {
+  padding: 22px 24px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-lg);
+  background: var(--accent-soft);
+}
+
+.guide-remember p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+@media (max-width: 720px) {
+  .guide {
+    padding: 20px 16px 56px;
+  }
+
+  .guide-head {
+    flex-direction: column;
+  }
+
+  .guide-cards {
+    grid-template-columns: 1fr;
+  }
+}
+

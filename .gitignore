@@ -1,0 +1,12 @@
+.cline/
+node_modules
+dist
+dist-ssr
+.DS_Store
+*.local
+*.log
+.vite
+coverage
+.env
+.env.*
+!.env.example

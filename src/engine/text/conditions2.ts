@@ -1,0 +1,38 @@
+import { simple } from './simple';
+import type { ConceptSpec } from './lexiconTypes';
+
+/** Conditions part 2: GI, respiratory, infectious, musculoskeletal, mental health, other. */
+export const CONDITION_SPECS_2: ConceptSpec[] = [
+  simple('condition', 'gerd', 'GERD', 'Gastrointestinal', 'gerd|gastroesophageal reflux|acid reflux|reflux disease|gord'),
+  simple('condition', 'gastritis', 'Gastritis', 'Gastrointestinal', 'gastritis|h. pylori gastritis|h pylori'),
+  simple('condition', 'ibs', 'Irritable Bowel Syndrome', 'Gastrointestinal', 'irritable bowel syndrome|ibs'),
+  simple('condition', 'diverticular-disease', 'Diverticular Disease', 'Gastrointestinal', 'diverticulosis|diverticulitis|diverticular disease'),
+  simple('condition', 'celiac-disease', 'Celiac Disease', 'Gastrointestinal', 'celiac disease|coeliac disease|celiac sprue'),
+  simple('condition', 'asthma', 'Asthma', 'Respiratory', 'asthma|reactive airway disease|exercise-induced asthma'),
+  simple('condition', 'copd', 'COPD', 'Respiratory', 'copd|chronic obstructive pulmonary disease|emphysema|chronic bronchitis'),
+  simple('condition', 'sleep-apnea', 'Obstructive Sleep Apnea', 'Respiratory', 'obstructive sleep apnea|sleep apnea|osa|sleep apnoea'),
+  simple('condition', 'allergic-rhinitis', 'Allergic Rhinitis', 'Respiratory', 'allergic rhinitis|hay fever|seasonal allergies'),
+  simple('condition', 'sinusitis', 'Sinusitis', 'Respiratory', 'sinusitis|acute sinusitis|chronic sinusitis|sinus infection'),
+  simple('condition', 'bronchitis', 'Bronchitis', 'Respiratory', 'bronchitis|acute bronchitis'),
+  simple('condition', 'pneumonia', 'Pneumonia', 'Respiratory', 'pneumonia|community acquired pneumonia'),
+  simple('condition', 'covid-19', 'COVID-19', 'Infectious', 'covid-19|covid 19|sars-cov-2 infection'),
+  simple('condition', 'long-covid', 'Post-acute COVID Syndrome', 'Infectious', 'long covid|post-acute covid|post-acute sequelae of covid'),
+  simple('condition', 'influenza', 'Influenza', 'Infectious', 'influenza|influenza a|influenza b|flu\\b'),
+  simple('condition', 'urinary-tract-infection', 'Urinary Tract Infection', 'Infectious', 'urinary tract infection|uti|cystitis|bladder infection'),
+  simple('condition', 'gout', 'Gout', 'Musculoskeletal', 'gout|gouty arthritis|hyperuricemia'),
+  simple('condition', 'osteoarthritis', 'Osteoarthritis', 'Musculoskeletal', 'osteoarthritis|degenerative joint disease|degenerative changes'),
+  simple('condition', 'rheumatoid-arthritis', 'Rheumatoid Arthritis', 'Musculoskeletal', 'rheumatoid arthritis|seropositive arthritis'),
+  simple('condition', 'osteoporosis', 'Osteoporosis', 'Musculoskeletal', 'osteoporosis|osteopenia|low bone density'),
+  simple('condition', 'low-back-pain', 'Low Back Pain', 'Musculoskeletal', 'low back pain|lumbar strain|lumbago|back pain'),
+  simple('condition', 'depression', 'Major Depressive Disorder', 'Mental health', 'major depressive disorder|depression|mdd|depressive disorder'),
+  simple('condition', 'anxiety', 'Anxiety Disorder', 'Mental health', 'generalized anxiety disorder|anxiety disorder|anxiety|gad'),
+  simple('condition', 'insomnia', 'Insomnia', 'Mental health', 'insomnia|sleep disturbance|difficulty sleeping'),
+  simple('condition', 'adhd', 'ADHD', 'Mental health', 'adhd|attention deficit hyperactivity disorder'),
+  simple('condition', 'ptsd', 'PTSD', 'Mental health', 'ptsd|post-traumatic stress disorder'),
+  simple('condition', 'migraine', 'Migraine', 'Neurological', 'migraine|migraine headache|migraines|migraine without aura'),
+  simple('condition', 'neuropathy', 'Peripheral Neuropathy', 'Neurological', 'peripheral neuropathy|diabetic neuropathy|neuropathy'),
+  simple('condition', 'benign-prostatic-hyperplasia', 'Benign Prostatic Hyperplasia', 'Urologic', 'benign prostatic hyperplasia|bph|prostate enlargement|enlarged prostate'),
+  simple('condition', 'eczema', 'Atopic Dermatitis', 'Dermatologic', 'atopic dermatitis|eczema'),
+  simple('condition', 'psoriasis', 'Psoriasis', 'Dermatologic', 'psoriasis|plaque psoriasis'),
+  simple('condition', 'acne', 'Acne', 'Dermatologic', 'acne|acne vulgaris'),
+];
