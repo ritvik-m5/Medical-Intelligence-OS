@@ -7,6 +7,8 @@
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tests](https://img.shields.io/badge/tests-694%2B%20passing-2ea043)](./package.json)
 [![Engine](https://img.shields.io/badge/engine-2.3.0-8b5cf6)](./src/engine/versions.ts)
+[![CI](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml/badge.svg)](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml)
+[![Pages](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/pages.yml/badge.svg)](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/pages.yml)
 
 Medical Memory is a **provenance-first inference platform** for longitudinal health records. It is not a symptom checker, a diagnostic chatbot, or a PDF summarizer.
 
@@ -51,6 +53,9 @@ cd Medical-Intelligence-OS
 npm install
 npm run dev          # http://localhost:5173 — opens on the Builder
 ```
+
+**Live demo (static build):** after the Pages workflow runs on `main`, open  
+**https://ritvik-m5.github.io/Medical-Intelligence-OS/** — same UI as production build; LLM proxy requires local `npm run dev`.
 
 **Try your own messy records** (optional):
 
@@ -119,7 +124,23 @@ npm run audit:ai-gateway    # routing, provenance, streaming
 npm run audit:ai-validation # model claims cannot invent personal facts
 ```
 
-CI runs **`npm run verify:pipeline`** on push to `main` (see [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)).
+CI runs **`npm run verify:pipeline`** on push to `main` (see [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)).  
+Dependabot opens weekly PRs for npm and GitHub Actions (see [`.github/dependabot.yml`](./.github/dependabot.yml)).
+
+---
+
+## Community
+
+| Resource | Link |
+| -------- | ---- |
+| Contributing | [CONTRIBUTING.md](./CONTRIBUTING.md) |
+| Code of conduct | [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) |
+| Security | [SECURITY.md](./SECURITY.md) |
+| License | [LICENSE](./LICENSE) |
+
+Use **Issues** (bug / feature templates) for tracked work. **Forks** are for collaborators who need their own copy before opening a pull request — the maintainer merges from forks, not from Insights alone.
+
+Repository social preview artwork: [`.github/social-preview.jpg`](./.github/social-preview.jpg) (upload under **Settings → General → Social preview** if GitHub has not picked it up automatically).
 
 ---
 
@@ -135,7 +156,7 @@ Medical Memory **organises, explains, cites, and checks** imported text. It does
 
 ## License & access
 
-Private repository. All rights reserved unless otherwise noted by the owner.
+Private repository — see [LICENSE](./LICENSE). All rights reserved unless the owner grants written permission.
 
 ---
 

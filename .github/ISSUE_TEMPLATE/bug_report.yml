@@ -1,0 +1,42 @@
+name: Bug report
+description: Something broke, regressed, or disagrees with the proof layer
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Include steps to reproduce and, if possible, the artifact id or view where you saw the issue.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      placeholder: Describe the incorrect behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. npm run dev
+        2. Open …
+        3. …
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit or branch (optional)
+      placeholder: main @ abc1234
+  - type: textarea
+    id: verify
+    attributes:
+      label: verify:pipeline output (optional)
+      description: Paste if you ran `npm run verify:pipeline`

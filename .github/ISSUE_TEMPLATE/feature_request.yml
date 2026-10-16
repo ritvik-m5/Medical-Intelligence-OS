@@ -1,0 +1,34 @@
+name: Feature request
+description: Propose a capability that respects provenance and engine boundaries
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User or research question
+      description: What question should a reader be able to answer?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: proof
+    attributes:
+      label: Proof / data source
+      description: Which artifact fields, rules, or spans power this? No new conclusions without a derivation path.
+    validations:
+      required: true
+  - type: checkboxes
+    id: gates
+    attributes:
+      label: Engineering gates
+      options:
+        - label: I expect this to need new or changed tests under src/
+          required: false
+        - label: I expect this to need audit:nav or product-audit updates
+          required: false

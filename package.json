@@ -1,6 +1,7 @@
 {
   "name": "medical-memory",
   "private": true,
+  "license": "UNLICENSED",
   "version": "0.1.0",
   "type": "module",
   "description": "Medical Memory — a personal health digital twin. Temporal Health Graph + provenance + contradiction engine.",

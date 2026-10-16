@@ -30,7 +30,11 @@ const llmProxy = {
   },
 };
 
+/** GitHub Pages serves from `/Medical-Intelligence-OS/`; local dev uses `/`. */
+const base = process.env.VITE_BASE ?? '/';
+
 export default defineConfig({
+  base,
   plugins: [react()],
   resolve: {
     alias: {
