@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { beforeEach, describe, expect, it } from 'vitest';
-import { act, createElement } from 'react';
+import { act, createElement, type ReactElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HomeView } from './HomeView';
 import { WhatIsThisView } from './WhatIsThisView';
@@ -15,7 +15,7 @@ beforeEach(() => {
   seedSampleRecord();
 });
 
-async function mount(view: () => JSX.Element) {
+async function mount(view: () => ReactElement) {
   const container = document.createElement('div');
   document.body.appendChild(container);
   const root = createRoot(container);

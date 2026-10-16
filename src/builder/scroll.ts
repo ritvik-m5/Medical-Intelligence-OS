@@ -63,7 +63,7 @@ export function usePrefersReducedMotion(): boolean {
  */
 export function useScrollProgress<T extends HTMLElement>(
   enabled = true,
-): { ref: React.RefObject<T>; progress: number } {
+): { ref: React.RefObject<T | null>; progress: number } {
   const ref = useRef<T>(null);
   const [progress, setProgress] = useState(0);
 
@@ -121,7 +121,7 @@ export function useScrollProgress<T extends HTMLElement>(
  */
 export function useReveal<T extends HTMLElement>(
   options: { threshold?: number; rootMargin?: string } = {},
-): { ref: React.RefObject<T>; revealed: boolean } {
+): { ref: React.RefObject<T | null>; revealed: boolean } {
   const ref = useRef<T>(null);
   const [revealed, setRevealed] = useState(false);
   const { threshold = 0.2, rootMargin = '0px 0px -10% 0px' } = options;

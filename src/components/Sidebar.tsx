@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useStore, type ViewId } from '../state/store';
 import { Icon } from './Icon';
 import { formatDate } from '../engine/text/normalize';
@@ -5,7 +6,7 @@ import { formatDate } from '../engine/text/normalize';
 interface NavEntry {
   id: ViewId;
   label: string;
-  icon: (props: { size?: number }) => JSX.Element;
+  icon: (props: { size?: number }) => ReactElement;
   group: 'start' | 'reconstruct' | 'inspect' | 'reason' | 'platform';
 }
 

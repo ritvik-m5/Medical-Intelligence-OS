@@ -3,9 +3,9 @@
 **Your health, reconstructed.**
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=061214)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tests](https://img.shields.io/badge/tests-694%2B%20passing-2ea043)](./package.json)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=061214)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tests](https://img.shields.io/badge/tests-699%20passing-2ea043)](./package.json)
 [![Engine](https://img.shields.io/badge/engine-2.3.0-8b5cf6)](./src/engine/versions.ts)
 [![CI](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml/badge.svg)](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml)
 [![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-0891b2)](https://ritvik-m5.github.io/Medical-Intelligence-OS/)

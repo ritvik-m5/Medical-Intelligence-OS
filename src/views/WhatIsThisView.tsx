@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useStore, EXPLAIN_DEPTH_LABEL, type ExplainDepth } from '../state/store';
 import { Icon } from '../components/Icon';
 
@@ -13,7 +14,7 @@ type DepthText = Record<ExplainDepth, string>;
 
 interface Section {
   id: string;
-  icon: (props: { size?: number }) => JSX.Element;
+  icon: (props: { size?: number }) => ReactElement;
   title: DepthText;
   body: DepthText;
 }

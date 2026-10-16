@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useStore, type ViewId } from '../state/store';
 import { Icon } from '../components/Icon';
 
@@ -17,7 +18,7 @@ import { Icon } from '../components/Icon';
 interface GuideEntry {
   view: ViewId;
   name: string;
-  icon: (props: { size?: number }) => JSX.Element;
+  icon: (props: { size?: number }) => ReactElement;
   what: string;
   when: string;
   looks: string;

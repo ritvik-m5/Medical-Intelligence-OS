@@ -116,6 +116,22 @@ describe('the lifecycle', () => {
     expect(applied.status).toBe('answered');
     expect(applied.question).toBe(question.question);
     expect(applied.evidence).toBe(question.evidence);
+  });
+
+  it('counts the split correctly', () => {
+    const questions = generateQuestions(input());
+    const overrides = Object.fromEntries(
+      questions.slice(0, 2).map((question) => [question.id, 'answered' as const]),
+    );
+    const counts = questionCounts(applyStatuses(questions, overrides));
+
+    expect(counts.total).toBe(questions.length);
+    expect(counts.answered).toBe(Math.min(2, questions.length));
+    expect(counts.open + counts.investigating + counts.answered + counts.dismissed).toBe(
+      counts.total,
+    );
+  });
+});
 
 /* ------------------------------------------------------------------ */
 /* Mutation: a corrupt input must change the questions                  */
@@ -187,22 +203,5 @@ describe('mutations are detected', () => {
     for (const question of questionsOf(base)) {
       expect(destinations.has(question.destination)).toBe(true);
     }
-  });
-});
-
-  });
-
-  it('counts the split correctly', () => {
-    const questions = generateQuestions(input());
-    const overrides = Object.fromEntries(
-      questions.slice(0, 2).map((question) => [question.id, 'answered' as const]),
-    );
-    const counts = questionCounts(applyStatuses(questions, overrides));
-
-    expect(counts.total).toBe(questions.length);
-    expect(counts.answered).toBe(Math.min(2, questions.length));
-    expect(counts.open + counts.investigating + counts.answered + counts.dismissed).toBe(
-      counts.total,
-    );
   });
 });
