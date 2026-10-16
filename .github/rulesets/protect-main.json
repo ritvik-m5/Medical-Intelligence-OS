@@ -8,10 +8,20 @@
       "exclude": []
     }
   },
+  "bypass_actors": [
+    {
+      "actor_id": 5,
+      "actor_type": "RepositoryRole",
+      "bypass_mode": "always"
+    }
+  ],
   "rules": [
+    { "type": "creation", "parameters": {} },
+    { "type": "update", "parameters": {} },
     { "type": "deletion", "parameters": {} },
     { "type": "non_fast_forward", "parameters": {} },
     { "type": "required_linear_history", "parameters": {} },
+    { "type": "required_signatures", "parameters": {} },
     {
       "type": "pull_request",
       "parameters": {
@@ -29,8 +39,37 @@
         "strict_required_status_checks_policy": true,
         "do_not_enforce_on_create": true,
         "required_status_checks": [
-          { "context": "verify", "integration_id": 15368 }
+          { "context": "verify", "integration_id": 15368 },
+          { "context": "coverage", "integration_id": 15368 },
+          { "context": "pages-build", "integration_id": 15368 },
+          { "context": "merge-gate", "integration_id": 15368 },
+          { "context": "Analyze", "integration_id": 15368 }
         ]
+      }
+    },
+    {
+      "type": "required_deployments",
+      "parameters": {
+        "required_deployment_environments": ["merge-gate"],
+        "dismiss_stale_deployments_on_push": true
+      }
+    },
+    {
+      "type": "required_code_scanning",
+      "parameters": {
+        "required_tools": [
+          {
+            "tool": "CodeQL",
+            "security_alerts_threshold": "high_or_higher",
+            "alert_threshold": "errors"
+          }
+        ]
+      }
+    },
+    {
+      "type": "code_coverage",
+      "parameters": {
+        "minimum_coverage": 60
       }
     },
     {
