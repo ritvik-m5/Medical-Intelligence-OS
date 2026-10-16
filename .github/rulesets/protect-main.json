@@ -9,18 +9,9 @@
     }
   },
   "rules": [
-    {
-      "type": "deletion",
-      "parameters": {}
-    },
-    {
-      "type": "non_fast_forward",
-      "parameters": {}
-    },
-    {
-      "type": "required_linear_history",
-      "parameters": {}
-    },
+    { "type": "deletion", "parameters": {} },
+    { "type": "non_fast_forward", "parameters": {} },
+    { "type": "required_linear_history", "parameters": {} },
     {
       "type": "pull_request",
       "parameters": {
@@ -29,7 +20,7 @@
         "require_code_owner_review": false,
         "require_last_push_approval": false,
         "required_review_thread_resolution": false,
-        "allowed_merge_methods": ["merge", "squash", "rebase"]
+        "allowed_merge_methods": ["squash", "rebase"]
       }
     },
     {
@@ -40,6 +31,13 @@
         "required_status_checks": [
           { "context": "verify", "integration_id": 15368 }
         ]
+      }
+    },
+    {
+      "type": "copilot_code_review",
+      "parameters": {
+        "review_on_push": false,
+        "review_draft_pull_requests": false
       }
     }
   ]
