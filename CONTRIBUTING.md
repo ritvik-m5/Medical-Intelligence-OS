@@ -2,6 +2,18 @@
 
 Thank you for your interest in **Medical Memory**. This repository is **private**; contributions are by invitation or explicit agreement with the maintainer.
 
+## Branch protection (`main`)
+
+The default branch uses the **Protect main** ruleset:
+
+- Pull requests required (reviews optional; CI must pass)
+- Required status check: **`verify`** (CI workflow)
+- No force-push or branch deletion; linear history (no merge commits)
+
+Open a PR from a feature branch; wait for green CI, then merge (squash or rebase recommended).
+
+Configuration: [`.github/rulesets/protect-main.json`](./.github/rulesets/protect-main.json) · [Rules on GitHub](https://github.com/ritvik-m5/Medical-Intelligence-OS/rules/25212607)
+
 ## Before you open a pull request
 
 1. **Read** the [Platform handbook](./docs/HANDBOOK.md) and [pipeline audit](./docs/pipeline-baseline-audit.md) — especially provenance and temporal (`asOf`) rules.
