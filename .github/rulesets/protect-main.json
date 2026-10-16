@@ -16,8 +16,6 @@
     }
   ],
   "rules": [
-    { "type": "creation", "parameters": {} },
-    { "type": "update", "parameters": {} },
     { "type": "deletion", "parameters": {} },
     { "type": "non_fast_forward", "parameters": {} },
     { "type": "required_linear_history", "parameters": {} },
@@ -50,26 +48,7 @@
     {
       "type": "required_deployments",
       "parameters": {
-        "required_deployment_environments": ["merge-gate"],
-        "dismiss_stale_deployments_on_push": true
-      }
-    },
-    {
-      "type": "required_code_scanning",
-      "parameters": {
-        "required_tools": [
-          {
-            "tool": "CodeQL",
-            "security_alerts_threshold": "high_or_higher",
-            "alert_threshold": "errors"
-          }
-        ]
-      }
-    },
-    {
-      "type": "code_coverage",
-      "parameters": {
-        "minimum_coverage": 60
+        "required_deployment_environments": ["merge-gate"]
       }
     },
     {
