@@ -9,9 +9,13 @@ The **Protect main** ruleset includes:
 - PRs required · direct pushes blocked · no force-push or branch deletion · linear history
 - Required checks: **`verify`**, **`coverage`**, **`pages-build`**, **`merge-gate`**, **CodeQL Analyze**
 - Required deployment environment: **`merge-gate`**
-- Code scanning (CodeQL) · minimum **60%** line coverage · **signed commits** on the default branch
+- Code scanning via required **CodeQL `Analyze`** check · **60%** line coverage enforced in the **`coverage`** job
+- **Signed commits** on the default branch
+- Required **`merge-gate`** deployment (after verify, coverage, and pages-build)
 - Copilot code review on pull requests
-- Repository **admins** are on the ruleset bypass list for emergencies
+- Repository **admins** can bypass the ruleset in emergencies
+
+To also enable **Restrict creations/updates** or **Restrict code coverage** in the GitHub UI, edit [Protect main](https://github.com/ritvik-m5/Medical-Intelligence-OS/rules/25212607) — those rules are not applied via the REST API on this plan.
 
 **Signed commits:** configure [SSH or GPG commit signing](https://docs.github.com/en/authentication/managing-commit-signature-verification) locally, then merge with verified commits.
 
