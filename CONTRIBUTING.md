@@ -1,16 +1,19 @@
 # Contributing
 
-Thank you for your interest in **Medical Memory**. This repository is **private**; contributions are by invitation or explicit agreement with the maintainer.
+Thank you for your interest in **Medical Memory**. Contributions are welcome via pull request.
 
 ## Branch protection (`main`)
 
-The default branch uses the **Protect main** ruleset:
+The **Protect main** ruleset includes:
 
-- Pull requests required (reviews optional; CI must pass)
-- Required status check: **`verify`** (CI workflow)
-- No force-push or branch deletion; linear history (no merge commits)
+- PRs required · direct pushes blocked · no force-push or branch deletion · linear history
+- Required checks: **`verify`**, **`coverage`**, **`pages-build`**, **`merge-gate`**, **CodeQL Analyze**
+- Required deployment environment: **`merge-gate`**
+- Code scanning (CodeQL) · minimum **60%** line coverage · **signed commits** on the default branch
+- Copilot code review on pull requests
+- Repository **admins** are on the ruleset bypass list for emergencies
 
-Open a PR from a feature branch; wait for green CI, then merge (squash or rebase recommended).
+**Signed commits:** configure [SSH or GPG commit signing](https://docs.github.com/en/authentication/managing-commit-signature-verification) locally, then merge with verified commits.
 
 Configuration: [`.github/rulesets/protect-main.json`](./.github/rulesets/protect-main.json) · [Rules on GitHub](https://github.com/ritvik-m5/Medical-Intelligence-OS/rules/25212607)
 
