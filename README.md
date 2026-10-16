@@ -8,6 +8,9 @@
 [![Tests](https://img.shields.io/badge/tests-694%2B%20passing-2ea043)](./package.json)
 [![Engine](https://img.shields.io/badge/engine-2.3.0-8b5cf6)](./src/engine/versions.ts)
 [![CI](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml/badge.svg)](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml)
+[![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-0891b2)](https://ritvik-m5.github.io/Medical-Intelligence-OS/)
+[![Discussions](https://img.shields.io/badge/discussions-questions%20%26%20ideas-57606a?logo=github)](https://github.com/ritvik-m5/Medical-Intelligence-OS/discussions)
+
 Medical Memory is a **provenance-first inference platform** for longitudinal health records. It is not a symptom checker, a diagnostic chatbot, or a PDF summarizer.
 
 Every conclusion is a **proof object**: a directed acyclic graph from source character spans → premises → rules → one conclusion. If it cannot be traced to text in a document, it is not shown as fact.
@@ -58,7 +61,7 @@ npm run dev          # http://localhost:5173 — opens on the Builder
 VITE_BASE=/ npm run build && npm run preview   # http://localhost:4173
 ```
 
-**GitHub Pages (optional):** enable **Settings → Pages → GitHub Actions**, then run the **Deploy GitHub Pages** workflow. Private repos require a [GitHub plan that includes Pages](https://docs.github.com/pages/getting-started-with-github-pages/about-github-pages); when live, set the site URL in **About → Website**.
+**Live demo:** [https://ritvik-m5.github.io/Medical-Intelligence-OS/](https://ritvik-m5.github.io/Medical-Intelligence-OS/) (static build from `main`; LLM features still need local `npm run dev`).
 
 **Try your own messy records** (optional):
 
@@ -141,9 +144,7 @@ Dependabot opens weekly PRs for npm and GitHub Actions (see [`.github/dependabot
 | Security | [SECURITY.md](./SECURITY.md) |
 | License | [LICENSE](./LICENSE) |
 
-Use **Issues** (bug / feature templates) for tracked work. **Forks** are for collaborators who need their own copy before opening a pull request — the maintainer merges from forks, not from Insights alone.
-
-Repository social preview artwork: [`.github/social-preview.jpg`](./.github/social-preview.jpg) (upload under **Settings → General → Social preview** if GitHub has not picked it up automatically).
+Use [**Issues**](https://github.com/ritvik-m5/Medical-Intelligence-OS/issues) (bug / feature templates) for tracked work and [**Discussions**](https://github.com/ritvik-m5/Medical-Intelligence-OS/discussions) for questions and ideas. **Fork** the repo, branch, and open a PR when you are ready to contribute ([`CONTRIBUTING.md`](./CONTRIBUTING.md)).
 
 ---
 
@@ -159,7 +160,7 @@ Medical Memory **organises, explains, cites, and checks** imported text. It does
 
 ## License & access
 
-Private repository — see [LICENSE](./LICENSE). All rights reserved unless the owner grants written permission.
+Public source — see [LICENSE](./LICENSE). All rights reserved unless the owner grants written permission.
 
 ---
 
