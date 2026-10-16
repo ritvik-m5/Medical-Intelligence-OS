@@ -8,8 +8,6 @@
 [![Tests](https://img.shields.io/badge/tests-694%2B%20passing-2ea043)](./package.json)
 [![Engine](https://img.shields.io/badge/engine-2.3.0-8b5cf6)](./src/engine/versions.ts)
 [![CI](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml/badge.svg)](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/ci.yml)
-[![Pages](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/pages.yml/badge.svg)](https://github.com/ritvik-m5/Medical-Intelligence-OS/actions/workflows/pages.yml)
-
 Medical Memory is a **provenance-first inference platform** for longitudinal health records. It is not a symptom checker, a diagnostic chatbot, or a PDF summarizer.
 
 Every conclusion is a **proof object**: a directed acyclic graph from source character spans → premises → rules → one conclusion. If it cannot be traced to text in a document, it is not shown as fact.
@@ -54,8 +52,13 @@ npm install
 npm run dev          # http://localhost:5173 — opens on the Builder
 ```
 
-**Live demo (static build):** after the Pages workflow runs on `main`, open  
-**https://ritvik-m5.github.io/Medical-Intelligence-OS/** — same UI as production build; LLM proxy requires local `npm run dev`.
+**Production preview locally:**
+
+```bash
+VITE_BASE=/ npm run build && npm run preview   # http://localhost:4173
+```
+
+**GitHub Pages (optional):** enable **Settings → Pages → GitHub Actions**, then run the **Deploy GitHub Pages** workflow. Private repos require a [GitHub plan that includes Pages](https://docs.github.com/pages/getting-started-with-github-pages/about-github-pages); when live, set the site URL in **About → Website**.
 
 **Try your own messy records** (optional):
 

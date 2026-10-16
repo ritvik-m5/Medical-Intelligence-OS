@@ -1,8 +1,8 @@
 name: Deploy GitHub Pages
 
+# Private repos need GitHub Pro (or a public repo) for Pages. Run manually after enabling
+# Settings → Pages → Source: GitHub Actions.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
